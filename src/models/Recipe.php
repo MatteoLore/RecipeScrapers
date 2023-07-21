@@ -5,73 +5,76 @@ namespace RecipeScrapers\models;
 abstract class Recipe
 {
 
-    public String $data;
+    public ?String $data;
 
-    public array $json;
+    public ?array $json;
 
-    public String $name;
+    public string $source;
 
-    public array $author;
+    public ?String $name;
 
-    public string $cookTime;
+    public ?array $author;
 
-    public string $cookingMethod;
+    public ?string $cookTime;
 
-    public string $category;
+    public ?string $cookingMethod;
 
-    public string $recipeCuisine;
+    public ?string $category;
 
-    public  array $recipeInstructions;
+    public ?string $recipeCuisine;
 
-    public string $recipeYield;
+    public  ?array $recipeInstructions;
 
-    public array $suitableForDiet;
+    public ?string $recipeYield;
 
-    public array $nutrition;
+    public ?array $suitableForDiet;
 
-    public string $estimatedCost;
+    public ?array $nutrition;
 
-    public string $performTime;
+    public ?string $estimatedCost;
 
-    public string $prepTime;
+    public ?string $performTime;
 
-    public array $step;
+    public ?string $prepTime;
 
-    public array $tool;
+    public ?array $step;
 
-    public  string $totalTime;
+    public ?array $tool;
 
-    public array $yield;
+    public  ?string $totalTime;
 
-    public string $description;
+    public ?array $yield;
 
-    public array $image;
+    public ?string $description;
 
-    public array $video;
+    public ?array $image;
 
-    public array $keyword;
+    public ?array $video;
 
-    public string $dateCreated;
+    public ?array $keyword;
 
-    public string $datePublished;
+    public ?string $dateCreated;
 
-    public string $dateModified;
+    public ?string $datePublished;
 
-    public array $aggregaterating;
+    public ?string $dateModified;
+
+    public ?array $aggregaterating;
 
     public function __construct(array $json, string $data)
     {
         $this->data = $data;
         $this->json = $json;
+        $this->source = "unknown source";
 
-        $this->name = $json["name"];
-        $this->author = $json["author"];
+        $this->name = $json["name"] ?? "name not found";
+        $this->author = $json["author"] ?? "author not found";
 
         $this->description = $json["description"];
         $this->keyword = $json["keyword"];
 
-        $this->recipeInstructions = $json["recipeInstructions"];
-        $this->step = $json["step"];
+        $this->recipeInstructions = $json["recipeInstructions"] ?? [];
+        $this->step = $json["step"] ?? [];
         $this->recipeCuisine = $json["recipeCuisine"];
         $this->category = $json["recipeCategory"];
         $this->recipeYield = $json["recipeYield"];
@@ -89,8 +92,8 @@ abstract class Recipe
         $this->prepTime = $json["prepTime"];
         $this->performTime = $json["performTime"];
 
-        $this->image = $json["image"];
-        $this->video = $json["video"];
+        $this->image = $json["image"] ?? "image unavailable";
+        $this->video = $json["video"] ?? "video unavailable";
 
         $this->dateCreated = $json["dateCreated"];
         $this->dateModified = $json["dateModified"];
@@ -277,6 +280,14 @@ abstract class Recipe
     public function getData(): string
     {
         return $this->data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource(): string
+    {
+        return $this->source;
     }
 
 
