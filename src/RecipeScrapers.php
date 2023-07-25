@@ -3,7 +3,7 @@
 namespace RecipeScrapers;
 
 use ErrorException;
-use RecipeScrapers\models\MarmitonRecipe;
+use RecipeScrapers\models\Marmiton;
 use RecipeScrapers\models\GialloZafferano;
 use RecipeScrapers\models\BlogGialloZafferano;
 use RecipeScrapers\utils\Type;
@@ -26,7 +26,7 @@ class RecipeScrapers
                     $data = $crawler->filterXPath('//head/script')->text();
                     $json = json_decode($data, true);
                     if ($this->isValidSchema($json)){
-                        return new MarmitonRecipe($json, $data);
+                        return new Marmiton($json, $data);
                     }else $this->error = $invalidData;
                     break;
                 case Type::GIALLO_ZAFFERANO:

@@ -4,7 +4,7 @@ namespace RecipeScrapers\models;
 
 use RecipeScrapers\utils\Type;
 
-class MarmitonRecipe extends Recipe
+class Marmiton extends Recipe
 {
     public function __construct(array $json, string $data)
     {
