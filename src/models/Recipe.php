@@ -290,15 +290,15 @@ abstract class Recipe
         return $this->source;
     }
 
-    
+
     public function getStep(int $index)
     {
-        return $this->step[$index+1];
+        return $this->step[$index-1];
     }
 
     public function getIngredient(int $index)
     {
-        return $this->recipeInstructions[$index+1];
+        return $this->recipeInstructions[$index-1];
     }
 
 }

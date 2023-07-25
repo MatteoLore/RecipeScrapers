@@ -17,6 +17,6 @@ class MarmitonRecipe extends Recipe
      */
     public function getStep(int $index)
     {
-        return $this->step[$index+1]["text"];
+        return $this->step[$index-1]["text"];
     }
 }
