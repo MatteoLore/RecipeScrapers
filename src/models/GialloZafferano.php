@@ -12,4 +12,13 @@ class GialloZafferano extends Recipe
         parent::__construct($json, $data);
         $this->source = Type::GIALLO_ZAFFERANO;
     }
+    
+    /*
+     * On GialloZafferano, the author have a dedicated schema, so to get the name we need the "name" key value;
+     */
+    public function getAuthor()
+    {
+        return $this->author["name"];
+    }
+
 }
