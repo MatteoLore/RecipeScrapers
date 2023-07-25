@@ -253,7 +253,7 @@ abstract class Recipe
     /**
      * @return mixed
      */
-    public function getTool()
+    public function getTools()
     {
         return $this->tool;
     }
@@ -299,6 +299,11 @@ abstract class Recipe
     public function getIngredient(int $index)
     {
         return $this->recipeInstructions[$index-1];
+    }
+
+    public function getTool(int $index)
+    {
+        return $this->tool[$index-1];
     }
 
 }
