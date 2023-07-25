@@ -5,6 +5,7 @@ namespace RecipeScrapers;
 use ErrorException;
 use RecipeScrapers\models\MarmitonRecipe;
 use RecipeScrapers\models\GialloZafferano;
+use RecipeScrapers\models\BlogGialloZafferano;
 use RecipeScrapers\utils\Type;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
@@ -35,6 +36,13 @@ class RecipeScrapers
                     $json = json_decode($data[2], true);
                     if ($this->isValidSchema($json)){
                         return new GialloZafferano($json, $data[2]);
+                    }else $this->error = $invalidData;
+                    break;
+                case Type::BLOG_GIALLO_ZAFFERANO:
+                    $data = $crawler->filter('script')->each(function ($node) {return $node->text();});
+                    $json = json_decode($data[20], true);
+                    if ($this->isValidSchema($json)){
+                        return new BlogGialloZafferano($json, $data[20]);
                     }else $this->error = $invalidData;
                     break;
                 default:

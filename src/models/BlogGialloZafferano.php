@@ -4,21 +4,19 @@ namespace RecipeScrapers\models;
 
 use RecipeScrapers\utils\Type;
 
-class GialloZafferano extends Recipe
+class BlogGialloZafferano extends Recipe
 {
-
     public function __construct(array $json, string $data)
     {
         parent::__construct($json, $data);
-        $this->source = Type::GIALLO_ZAFFERANO;
+        $this->source = Type::BLOG_GIALLO_ZAFFERANO;
     }
 
     /*
-     * On GialloZafferano, the author have a dedicated schema, so to get the name we need the "name" key value;
+     * On BlogGialloZafferano, the author have a dedicated schema, so to get the name we need the "name" key value;
      */
     public function getAuthor()
     {
         return $this->author["name"];
     }
-
 }
