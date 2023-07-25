@@ -3,6 +3,7 @@
 namespace RecipeScrapers;
 
 use ErrorException;
+use RecipeScrapers\models\FattoInCasaDaBenedetta;
 use RecipeScrapers\models\Marmiton;
 use RecipeScrapers\models\GialloZafferano;
 use RecipeScrapers\models\BlogGialloZafferano;
@@ -25,15 +26,15 @@ class RecipeScrapers
                 case Type::MARMITON:
                     $data = $crawler->filterXPath('//head/script')->text();
                     $json = json_decode($data, true);
+
                     if ($this->isValidSchema($json)){
                         return new Marmiton($json, $data);
                     }else $this->error = $invalidData;
                     break;
                 case Type::GIALLO_ZAFFERANO:
-                    $data = $crawler->filterXPath('//head/script')->each(function ($node) {
-                        return $node->text();
-                    });
+                    $data = $crawler->filterXPath('//head/script')->each(function ($node) {return $node->text();});
                     $json = json_decode($data[2], true);
+
                     if ($this->isValidSchema($json)){
                         return new GialloZafferano($json, $data[2]);
                     }else $this->error = $invalidData;
@@ -41,8 +42,17 @@ class RecipeScrapers
                 case Type::BLOG_GIALLO_ZAFFERANO:
                     $data = $crawler->filter('script')->each(function ($node) {return $node->text();});
                     $json = json_decode($data[20], true);
+
                     if ($this->isValidSchema($json)){
                         return new BlogGialloZafferano($json, $data[20]);
+                    }else $this->error = $invalidData;
+                    break;
+                case Type::FATTO_IN_CASA_DA_BENEDETTA:
+                    $data = $crawler->filter("script")->each(function ($node) {return $node->text();});
+                    $json = json_decode($data[23], true);
+
+                    if ($this->isValidSchema($json)){
+                        return new FattoInCasaDaBenedetta($json, $data[23]);
                     }else $this->error = $invalidData;
                     break;
                 default:

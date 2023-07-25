@@ -9,4 +9,6 @@ enum Type
      const GIALLO_ZAFFERANO = "www.giallozafferano.it";
 
      const BLOG_GIALLO_ZAFFERANO = "blog.giallozafferano.it";
+
+     const FATTO_IN_CASA_DA_BENEDETTA = "www.fattoincasadabenedetta.it";
 }
