@@ -3,6 +3,7 @@
 namespace RecipeScrapers\models;
 
 use RecipeScrapers\utils\AggregateRating;
+use RecipeScrapers\utils\VideoObject;
 
 abstract class Recipe
 {
@@ -51,7 +52,7 @@ abstract class Recipe
 
     public ?array $image;
 
-    public ?array $video;
+    public ?VideoObject $video;
 
     public ?array $keyword;
 
@@ -95,7 +96,7 @@ abstract class Recipe
         $this->performTime = $json["performTime"];
 
         $this->image = $json["image"] ?? "image unavailable";
-        $this->video = $json["video"] ?? "video unavailable";
+        $this->video = new VideoObject($json["video"]);
 
         $this->dateCreated = $json["dateCreated"];
         $this->dateModified = $json["dateModified"];
