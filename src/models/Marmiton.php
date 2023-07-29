@@ -10,6 +10,21 @@ class Marmiton extends Recipe
     {
         parent::__construct($json, $data);
         $this->source = Type::MARMITON;
+
+        $this->cookingMethod = null;
+        $this->yield = null;
+
+        $this->nutrition = null;
+        $this->estimatedCost = null;
+        $this->suitableForDiet = null;
+        $this->tool = null;
+
+        $this->performTime = null;
+
+        $this->dateCreated = null;
+        $this->dateModified = null;
+
+        if (is_null($json["video"])) $this->video = null;
     }
 
     /*
