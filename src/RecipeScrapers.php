@@ -40,8 +40,17 @@ class RecipeScrapers
                     }else $this->error = $invalidData;
                     break;
                 case Type::BLOG_GIALLO_ZAFFERANO:
-                    $data = $crawler->filter('script')->each(function ($node) {return $node->text();});
-                    $json = json_decode($data[20], true);
+                    $data = $crawler->filter('script')->each(function ($node) {
+                        $text = $node->text;
+                        $json = json_decode($text, true);
+                        if (is_array($json)){
+                            if($json["@context"] === "http:\/\/schema.org" and $json["@type"] === "Recipe"){
+                                return $text;
+                            }
+                        }
+                        return;
+                    });
+                    $json = json_decode($data[0], true);
 
                     if ($this->isValidSchema($json)){
                         return new BlogGialloZafferano($json, $data[20]);
