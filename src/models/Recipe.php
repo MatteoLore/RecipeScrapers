@@ -2,6 +2,8 @@
 
 namespace RecipeScrapers\models;
 
+use RecipeScrapers\utils\AggregateRating;
+
 abstract class Recipe
 {
 
@@ -59,7 +61,7 @@ abstract class Recipe
 
     public ?string $dateModified;
 
-    public ?array $aggregaterating;
+    public ?AggregateRating $aggregaterating;
 
     public function __construct(array $json, string $data)
     {
@@ -82,7 +84,7 @@ abstract class Recipe
         $this->cookingMethod = $json["cookingMethod"];
 
         $this->nutrition = $json["nutrition"];
-        $this->aggregaterating = $json["aggregaterating"];
+        $this->aggregaterating = new AggregateRating($json["aggregaterating"]);
         $this->estimatedCost = $json["estimatedCost"];
         $this->suitableForDiet = $json["suitableForDiet"];
         $this->tool = $json["tool"];
@@ -218,10 +220,7 @@ abstract class Recipe
     /**
      * @return mixed
      */
-    /**
-     * @return mixed
-     */
-    public function getAggregaterating()
+    public function getAggregaterating(): AggregateRating
     {
         return $this->aggregaterating;
     }
