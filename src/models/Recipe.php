@@ -76,8 +76,8 @@ abstract class Recipe
         $this->description = $json["description"];
         $this->keyword = $json["keyword"];
 
-        $this->recipeInstructions = $json["recipeInstructions"] ?? [];
-        $this->step = $json["step"] ?? [];
+        $this->recipeInstructions = $json["recipeIngredient"] ?? [];
+        $this->step = $json["recipeInstructions"] ?? [];
         $this->recipeCuisine = $json["recipeCuisine"];
         $this->category = $json["recipeCategory"];
         $this->recipeYield = $json["recipeYield"];
