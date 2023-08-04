@@ -10,6 +10,25 @@ class FattoInCasaDaBenedetta extends Recipe
     {
         parent::__construct($json, $data);
         $this->source = Type::FATTO_IN_CASA_DA_BENEDETTA;
+
+        $this->keyword = null;
+
+        $this->recipeCuisine = null;
+        $this->yield = null;
+        $this->cookingMethod = null;
+
+        $this->nutrition = null;
+        $this->estimatedCost = null;
+        $this->suitableForDiet = null;
+        $this->tool = null;
+
+        $this->performTime = null;
+
+        $this->video = null;
+
+        $this->dateCreated = null;
+        $this->dateModified = null;
+        $this->datePublished = null;
     }
 
     /*
