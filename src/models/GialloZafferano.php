@@ -11,6 +11,15 @@ class GialloZafferano extends Recipe
     {
         parent::__construct($json, $data);
         $this->source = Type::GIALLO_ZAFFERANO;
+
+        $this->recipeCuisine = null;
+        $this->yield = null;
+
+        $this->tool = null;
+
+        $this->performTime = null;
+
+        $this->dateCreated = null;
     }
 
     /*
