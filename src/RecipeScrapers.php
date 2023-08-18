@@ -24,11 +24,11 @@ class RecipeScrapers
             $crawler = $client->request("GET", $uri);
             switch ($this->getSource($uri)){
                 case Type::MARMITON:
-                    $data = $crawler->filterXPath('//head/script')->text();
-                    $json = json_decode($data, true);
+                    $data = $crawler->filter('script')->each(function ($node){return $node->text();});
+                    $json = json_decode($data[3], true);
 
                     if ($this->isValidSchema($json)){
-                        return new Marmiton($json, $data);
+                        return new Marmiton($json, $data[3]);
                     }else $this->error = $invalidData;
                     break;
                 case Type::GIALLO_ZAFFERANO:
