@@ -58,10 +58,10 @@ class RecipeScrapers
                     break;
                 case Type::FATTO_IN_CASA_DA_BENEDETTA:
                     $data = $crawler->filter("script")->each(function ($node) {return $node->text();});
-                    $json = json_decode($data[23], true);
+                    $json = json_decode($data[20], true);
 
                     if ($this->isValidSchema($json)){
-                        return new FattoInCasaDaBenedetta($json, $data[23]);
+                        return new FattoInCasaDaBenedetta($json, $data[20]);
                     }else $this->error = $invalidData;
                     break;
                 default:
