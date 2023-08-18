@@ -8,15 +8,15 @@ use RecipeScrapers\utils\VideoObject;
 abstract class Recipe
 {
 
-    public ?String $data;
+    public ?string $data;
 
     public ?array $json;
 
     public string $source;
 
-    public ?String $name;
+    public ?string $name;
 
-    public ?array $author;
+    public array|string $author;
 
     public ?string $cookTime;
 
