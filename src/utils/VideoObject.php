@@ -19,17 +19,15 @@ class VideoObject
 
     public function __construct(array $json)
     {
-        if ($json["@type"] != "VideoObject"){
-            throw new \ErrorException("Invalid data");
-        }
+        $notfound = "Data not found";
 
-        $this->name = $json["name"];
-        $this->description = $json["description"];
-        $this->uploadDate = $json["uploadDate"];
+        $this->name = $json["name"] ?? $notfound;
+        $this->description = $json["description"] ?? $notfound;
+        $this->uploadDate = $json["uploadDate"] ?? $notfound;
 
-        $this->thumbnailUrl = $json["thumbnailUrl"];
-        $this->contentUrl = $json["contentUrl"];
-        $this->embedUrl = $json["embedUrl"];
+        $this->thumbnailUrl = $json["thumbnailUrl"] ?? [$notfound];
+        $this->contentUrl = $json["contentUrl"] ?? $notfound;
+        $this->embedUrl = $json["embedUrl"] ?? $notfound;
     }
 
     /**

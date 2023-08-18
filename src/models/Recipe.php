@@ -22,7 +22,7 @@ abstract class Recipe
 
     public ?string $cookingMethod;
 
-    public ?string $category;
+    public string|array $category;
 
     public ?string $recipeCuisine;
 
@@ -50,7 +50,7 @@ abstract class Recipe
 
     public ?string $description;
 
-    public ?array $image;
+    public array|string $image;
 
     public ?VideoObject $video;
 
@@ -87,7 +87,7 @@ abstract class Recipe
         $this->cookingMethod = $json["cookingMethod"] ?? $notfound;
 
         $this->nutrition = $json["nutrition"] ?? [];
-        $this->aggregaterating = new AggregateRating($json["aggregateRating"] ?? [$notfound]);
+        $this->aggregaterating = new AggregateRating($json["aggregateRating"] ?? []);
         $this->estimatedCost = $json["estimatedCost"] ?? $notfound;
         $this->suitableForDiet = $json["suitableForDiet"] ?? [];
         $this->tool = $json["tool"] ?? [];
@@ -97,8 +97,8 @@ abstract class Recipe
         $this->prepTime = $json["prepTime"] ?? $notfound;
         $this->performTime = $json["performTime"] ?? $notfound;
 
-        $this->image = $json["image"] ?? "image unavailable";
-        $this->video = new VideoObject($json["video"] ?? [$notfound]);
+        $this->image = $json["image"] ?? $notfound;
+        $this->video = new VideoObject($json["video"] ?? []);
 
         $this->dateCreated = $json["dateCreated"] ?? $notfound;
         $this->dateModified = $json["dateModified"] ?? $notfound;

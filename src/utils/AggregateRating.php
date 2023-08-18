@@ -14,11 +14,8 @@ class AggregateRating
     public int $worstRating;
     public function __construct(array $json)
     {
-        if ($json["@type"] != "AggregateRating"){
-            throw new \ErrorException("Invalid data");
-        }
-        $this->ratingValue = (int)$json["ratingValue"];
-        $this->reviewCount = (int)$json["reviewCount"];
+        $this->ratingValue = (int)$json["ratingValue"] ?? 5;
+        $this->reviewCount = (int)$json["reviewCount"] ?? 0;
 
         $this->bestRating = (int)$json["bestRating"] ?? 5;
         $this->worstRating = (int)$json["worstRating"] ?? 0;
