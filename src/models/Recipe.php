@@ -66,41 +66,43 @@ abstract class Recipe
 
     public function __construct(array $json, string $data)
     {
+        $notfound = "Data not found";
+
         $this->data = $data;
         $this->json = $json;
         $this->source = "unknown source";
 
-        $this->name = $json["name"] ?? "name not found";
-        $this->author = $json["author"] ?? "author not found";
+        $this->name = $json["name"] ?? $notfound;
+        $this->author = $json["author"] ?? $notfound;
 
-        $this->description = $json["description"];
-        $this->keyword = $json["keyword"];
+        $this->description = $json["description"] ?? $notfound;
+        $this->keyword = $json["keyword"] ?? [];
 
         $this->recipeInstructions = $json["recipeIngredient"] ?? [];
         $this->step = $json["recipeInstructions"] ?? [];
-        $this->recipeCuisine = $json["recipeCuisine"];
-        $this->category = $json["recipeCategory"];
-        $this->recipeYield = $json["recipeYield"];
-        $this->yield = $json["yield"];
-        $this->cookingMethod = $json["cookingMethod"];
+        $this->recipeCuisine = $json["recipeCuisine"] ?? $notfound;
+        $this->category = $json["recipeCategory"] ?? $notfound;
+        $this->recipeYield = $json["recipeYield"] ?? $notfound;
+        $this->yield = $json["yield"] ?? [];
+        $this->cookingMethod = $json["cookingMethod"] ?? $notfound;
 
-        $this->nutrition = $json["nutrition"];
-        $this->aggregaterating = new AggregateRating($json["aggregaterating"]);
-        $this->estimatedCost = $json["estimatedCost"];
-        $this->suitableForDiet = $json["suitableForDiet"];
-        $this->tool = $json["tool"];
+        $this->nutrition = $json["nutrition"] ?? [];
+        $this->aggregaterating = new AggregateRating($json["aggregateRating"] ?? [$notfound]);
+        $this->estimatedCost = $json["estimatedCost"] ?? $notfound;
+        $this->suitableForDiet = $json["suitableForDiet"] ?? [];
+        $this->tool = $json["tool"] ?? [];
 
-        $this->totalTime = $json["totalTime"];
-        $this->cookTime = $json["cookTime"];
-        $this->prepTime = $json["prepTime"];
-        $this->performTime = $json["performTime"];
+        $this->totalTime = $json["totalTime"] ?? $notfound;
+        $this->cookTime = $json["cookTime"] ?? $notfound;
+        $this->prepTime = $json["prepTime"] ?? $notfound;
+        $this->performTime = $json["performTime"] ?? $notfound;
 
         $this->image = $json["image"] ?? "image unavailable";
-        $this->video = new VideoObject($json["video"]);
+        $this->video = new VideoObject($json["video"] ?? [$notfound]);
 
-        $this->dateCreated = $json["dateCreated"];
-        $this->dateModified = $json["dateModified"];
-        $this->datePublished = $json["datePublished"];
+        $this->dateCreated = $json["dateCreated"] ?? $notfound;
+        $this->dateModified = $json["dateModified"] ?? $notfound;
+        $this->datePublished = $json["datePublished"] ?? $notfound;
 
 
     }
