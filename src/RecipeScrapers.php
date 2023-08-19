@@ -42,26 +42,32 @@ class RecipeScrapers
                     break;
 
                 case Type::BLOG_GIALLO_ZAFFERANO:
-                    $d = "";
-                    $crawler->filter('script')->each(function ($node) use(&$d){
+                    $data = "";
+                    $crawler->filter('script')->each(function ($node) use(&$data){
                         if ($this->isValidSchema(json_decode($node->text(), true))){
-                            $d = $node->text();
+                            $data = $node->text();
                         }
                         return null;
                     });
-                    $json = json_decode($d, true);
+                    $json = json_decode($data, true);
 
                     if ($this->isValidSchema($json)){
-                        return new BlogGialloZafferano($json, $d);
+                        return new BlogGialloZafferano($json, $data);
                     }else $this->error = $invalidData;
                     break;
 
                 case Type::FATTO_IN_CASA_DA_BENEDETTA:
-                    $data = $crawler->filter("script")->each(function ($node) {return $node->text();});
-                    $json = json_decode($data[20], true);
+                    $data = "";
+                    $crawler->filter('script')->each(function ($node) use(&$data){
+                        if ($this->isValidSchema(json_decode($node->text(), true))){
+                            $data = $node->text();
+                        }
+                        return null;
+                    });
+                    $json = json_decode($data, true);
 
                     if ($this->isValidSchema($json)){
-                        return new FattoInCasaDaBenedetta($json, $data[20]);
+                        return new FattoInCasaDaBenedetta($json, $data);
                     }else $this->error = $invalidData;
                     break;
                 default:
