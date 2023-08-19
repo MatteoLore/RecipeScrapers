@@ -22,13 +22,13 @@ abstract class Recipe
 
     public ?string $cookingMethod;
 
-    public string|array $category;
+    public string|array|null $category;
 
     public ?string $recipeCuisine;
 
     public  ?array $recipeInstructions;
 
-    public ?string $recipeYield;
+    public array|string|null $recipeYield;
 
     public ?array $suitableForDiet;
 
@@ -50,11 +50,11 @@ abstract class Recipe
 
     public ?string $description;
 
-    public array|string $image;
+    public array|string|null $image;
 
     public ?VideoObject $video;
 
-    public ?array $keyword;
+    public array|string|null $keyword;
 
     public ?string $dateCreated;
 

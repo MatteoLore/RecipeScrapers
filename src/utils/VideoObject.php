@@ -11,7 +11,7 @@ class VideoObject
 
     public string $uploadDate;
 
-    public array $thumbnailUrl;
+    public array|string $thumbnailUrl;
 
     public string $contentUrl;
 
@@ -25,7 +25,7 @@ class VideoObject
         $this->description = $json["description"] ?? $notfound;
         $this->uploadDate = $json["uploadDate"] ?? $notfound;
 
-        $this->thumbnailUrl = $json["thumbnailUrl"] ?? [$notfound];
+        $this->thumbnailUrl = $json["thumbnailUrl"] ?? $notfound;
         $this->contentUrl = $json["contentUrl"] ?? $notfound;
         $this->embedUrl = $json["embedUrl"] ?? $notfound;
     }
