@@ -31,6 +31,7 @@ class RecipeScrapers
                         return new Marmiton($json, $data[3]);
                     }else $this->error = $invalidData;
                     break;
+
                 case Type::GIALLO_ZAFFERANO:
                     $data = $crawler->filterXPath('//head/script')->each(function ($node) {return $node->text();});
                     $json = json_decode($data[2], true);
@@ -39,23 +40,22 @@ class RecipeScrapers
                         return new GialloZafferano($json, $data[2]);
                     }else $this->error = $invalidData;
                     break;
+
                 case Type::BLOG_GIALLO_ZAFFERANO:
-                    $data = $crawler->filter('script')->each(function ($node) {
-                        $text = $node->text;
-                        $json = json_decode($text, true);
-                        if (is_array($json)){
-                            if($json["@context"] === "http:\/\/schema.org" and $json["@type"] === "Recipe"){
-                                return $text;
-                            }
+                    $d = "";
+                    $crawler->filter('script')->each(function ($node) use(&$d){
+                        if ($this->isValidSchema(json_decode($node->text(), true))){
+                            $d = $node->text();
                         }
-                        return;
+                        return null;
                     });
-                    $json = json_decode($data[0], true);
+                    $json = json_decode($d, true);
 
                     if ($this->isValidSchema($json)){
-                        return new BlogGialloZafferano($json, $data[20]);
+                        return new BlogGialloZafferano($json, $d);
                     }else $this->error = $invalidData;
                     break;
+
                 case Type::FATTO_IN_CASA_DA_BENEDETTA:
                     $data = $crawler->filter("script")->each(function ($node) {return $node->text();});
                     $json = json_decode($data[20], true);
