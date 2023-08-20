@@ -1,5 +1,5 @@
 {
-    "name": "matt/recipe-scrapers",
+    "name": "matteolore/recipe-scrapers",
     "type": "librairy",
     "autoload": {
         "psr-4": {
