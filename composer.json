@@ -1,6 +1,8 @@
 {
     "name": "matteolore/recipe-scrapers",
+    "description": "RecipeScrapers is a PHP library that allows you to scrape and extract recipe information from somes cooking websites.",
     "type": "librairy",
+    "license": "GPL-3.0-only",
     "autoload": {
         "psr-4": {
             "RecipeScrapers\\": "src/"
@@ -12,6 +14,7 @@
         }
     ],
     "require": {
+        "php": ">=8.2",
         "symfony/http-client": "^6.3",
         "symfony/browser-kit": "^6.3",
         "symfony/css-selector": "^6.3"
