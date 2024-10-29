@@ -34,7 +34,7 @@ class RecipeScrapers
 
                 case Type::GIALLO_ZAFFERANO:
                     $data = $crawler->filterXPath('//head/script')->each(function ($node) {return $node->text();});
-                    $json = json_decode($data[2], true);
+                    $json = json_decode($data[3], true);
 
                     if ($this->isValidSchema($json)){
                         return new GialloZafferano($json, $data[2]);
