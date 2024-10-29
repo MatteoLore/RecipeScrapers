@@ -24,8 +24,10 @@ class RecipeScrapers
             $crawler = $client->request("GET", $uri);
             switch ($this->getSource($uri)){
                 case Type::MARMITON:
-                    $data = $crawler->filter('script')->each(function ($node){return $node->text();});
-                    $json = json_decode($data[3], true);
+                    $data = $crawler->filterXPath('//head/script[@type="application/ld+json"]')->each(function ($node) {
+                        return $node->text();
+                    });
+                    $json = json_decode($data[1], true);
 
                     if ($this->isValidSchema($json)){
                         return new Marmiton($json, $data[3]);
